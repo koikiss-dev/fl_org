@@ -1,3 +1,11 @@
+"""
+Copyright (c) 2025 Yako
+
+This file is part of a project licensed under the MIT License.
+See the LICENSE file in the project root for license information.
+"""
+
+
 import os
 import shutil
 
@@ -23,20 +31,12 @@ def get_path_of_file(file:str) -> str:
 def get_files(path:str) -> list[str]:
     return os.listdir(path)
 
-
-def isFile(file:str):
-    if os.path.isfile(file) and not file == 'organizer.py':
-        return True
-    
-def isDirectory(directory:str):
-    print(os.path.isdir(directory))
-    return os.path.isdir(directory)
-
 def get_current_directories(current_path:str):
     return list(filter(lambda x: os.path.isdir(f'{current_path}/{x}'), get_files(current_path)))
 
 def get_current_files(current_path:str):
-    return list(filter(lambda x: True if os.path.isfile(f'{current_path}/{x}') and not x == "organizer.py" else False, get_files(current_path)))
+    no_filter_files = ("organizer.py", 'README.md')
+    return list(filter(lambda x: True if os.path.isfile(f'{current_path}/{x}') and x not in no_filter_files else False, get_files(current_path)))
 
 if __name__ == "__main__":
     current_path = os.getcwd()
@@ -59,7 +59,6 @@ if __name__ == "__main__":
         "Aplicaciones": ['apk'],
         "Web": ['html', 'css', 'js'],
         "Scripts": ['py', 'java', 'c', 'cpp', 'php', 'ts'],
-        "Markdown": ['md'],
         "Gráficos": ['svg'],
         "Iconos": ['ico']
     }
